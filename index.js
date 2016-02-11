@@ -29,6 +29,11 @@ function update(chunk, enc, callback) {
   var info = {
     pcpu: chunk.stats.cpu_stats.cpu_usage.cpu_percent,
     memory: chunk.stats.memory_stats.stats.total_rss,
+    memory_usage: chunk.stats.memory_stats.usage,
+    memory_limit: chunk.stats.memory_stats.limit,
+    memory_cached: chunk.stats.memory_stats.stats.total_cache,
+    network_rx: chunk.stats.network.rx_bytes,
+    network_tx: chunk.stats.network.tx_bytes,
   };
 
   updateContainer(name, info)
@@ -36,6 +41,9 @@ function update(chunk, enc, callback) {
 }
 
 function updateContainer (name, info) {
-  librato.measure('dstats-'+name+'-pcpu', info.pcpu);
-  librato.measure('dstats-'+name+'-memory', info.memory);
+  for (var prop in info) {
+    if(info.hasOwnProperty(prop)) {
+      librato.measure('docker-container-' + prop, info[prop], { source: name });
+    }
+  }
 }
