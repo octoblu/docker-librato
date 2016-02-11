@@ -9,17 +9,18 @@ env.validate(process.env, {
   LIBRATO_TOKEN: {required: true},
 });
 
+console.log('Starting Librato...');
 librato.configure({
   email: env.get('LIBRATO_EMAIL'),
   token: env.get('LIBRATO_TOKEN'),
 });
 
-// start librato
 librato.start();
 
+console.log('Starting Docker event stream...');
 var stats = dockerstats({
   docker: null,
-  events: allcontainers({docker:null})
+  events: allcontainers({preheat: true, docker:null})
 });
 
 stats.pipe(through.obj(update));
@@ -41,6 +42,7 @@ function update(chunk, enc, callback) {
 }
 
 function updateContainer (name, info) {
+  console.log('updating stats for ' + name, info);
   for (var prop in info) {
     if(info.hasOwnProperty(prop)) {
       librato.measure('docker-container-' + prop, info[prop], { source: name });
