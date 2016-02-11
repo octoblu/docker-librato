@@ -52,7 +52,9 @@ function update(chunk, enc, callback) {
 }
 
 function updateContainer (name, info) {
-  console.log('updating stats for ' + name, info);
+  if(env.get('VERBOSE')) {
+    console.log('Updating stats for ' + name, info);
+  }
   for (var prop in info) {
     if(info.hasOwnProperty(prop)) {
       librato.measure('docker-container-' + prop, info[prop], { source: name });
