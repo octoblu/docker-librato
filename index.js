@@ -23,6 +23,13 @@ var stats = dockerstats({
   events: allcontainers({preheat: true, docker:null})
 });
 
+process.on('SIGTERM', function () {
+  console.log('Shutting down gracefully...');
+  librato.stop();
+  stats.destroy();
+  process.exit(0);
+});
+
 stats.pipe(through.obj(update));
 
 function update(chunk, enc, callback) {
