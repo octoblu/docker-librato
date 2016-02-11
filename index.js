@@ -33,9 +33,12 @@ function update(chunk, enc, callback) {
     memory_usage: chunk.stats.memory_stats.usage,
     memory_limit: chunk.stats.memory_stats.limit,
     memory_cached: chunk.stats.memory_stats.stats.total_cache,
-    network_rx: chunk.stats.network.rx_bytes,
-    network_tx: chunk.stats.network.tx_bytes,
   };
+
+  if(chunk.stats.network) {
+    info.network_rx = chunk.stats.network.rx_bytes;
+    info.network_tx = chunk.statsr.network.tx_bytes;
+  }
 
   updateContainer(name, info)
   callback();
