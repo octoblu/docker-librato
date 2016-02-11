@@ -13,10 +13,10 @@
   "author": "Meteorhacks",
   "license": "MIT",
   "dependencies": {
-    "docker-allcontainers": "^0.2.0",
-    "docker-stats": "^0.2.0",
-    "envalid": "^0.1.0",
-    "librato-node": "^2.1.1",
-    "through2": "^0.6.3"
+    "docker-allcontainers": "0.4.0",
+    "docker-stats": "^0.5.1",
+    "envalid": "0.2.0",
+    "librato-node": "4.0.2",
+    "through2": "2.0.1"
   }
 }
