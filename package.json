@@ -1,6 +1,6 @@
 {
   "name": "docker-librato",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Forward all stats from all running docker containers to Librato",
   "repository": {
     "type": "git",
@@ -13,10 +13,12 @@
   "author": "Meteorhacks",
   "license": "MIT",
   "dependencies": {
+    "debug": "^2.2.0",
     "docker-allcontainers": "^0.6.1",
     "docker-stats": "^0.7.0",
     "envalid": "^2.2.0",
     "librato-node": "^4.1.0",
+    "lodash": "^4.16.1",
     "sigterm-handler": "^1.0.3",
     "through2": "2.0.1"
   }
