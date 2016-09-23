@@ -11,11 +11,13 @@ const {
   str,
   email,
   bool,
+  num,
 } = envalid
 
 const env = envalid.cleanEnv(process.env, {
   LIBRATO_EMAIL: email(),
   LIBRATO_TOKEN: str(),
+  LIBRATO_PERIOD: num({ default: 1000 * 60 * 3 }),
   CLUSTER_NAME: str(),
   MACHINE_ID: str(),
 });
@@ -25,6 +27,7 @@ console.log('Starting Librato...');
 librato.configure({
   email: env.LIBRATO_EMAIL,
   token: env.LIBRATO_TOKEN,
+  period: env.LIBRATO_PERIOD,
 });
 
 librato.start();
