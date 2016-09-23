@@ -1,6 +1,6 @@
 {
   "name": "docker-librato",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Forward all stats from all running docker containers to Librato",
   "repository": {
     "type": "git",
