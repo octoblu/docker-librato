@@ -12,7 +12,7 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e LIBRATO_EMAIL="" \
   -e LIBRATO_TOKEN="" \
-  meteorhacks/docker-librato
+  quay.io/octoblu/docker-librato:v1.0.0
 ```
 
 You can also use two different tokens for logging and stats:
@@ -21,7 +21,7 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e LIBRATO_EMAIL="" \
   -e LIBRATO_TOKEN="" \
-  meteorhacks/docker-librato
+  quay.io/octoblu/docker-librato:v1.0.0
 ```
 
 ### Running container in a restricted environment.
@@ -33,7 +33,7 @@ docker run --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e LIBRATO_EMAIL="" \
   -e LIBRATO_TOKEN="" \
-  meteorhacks/docker-librato
+  quay.io/octoblu/docker-librato:v1.0.0
 ```
 
 ## Building a docker repo from this repository

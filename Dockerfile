@@ -1,10 +1,14 @@
-FROM node:0.12.0
-MAINTAINER Meteorhacks
+MAINTAINER Octoblu, Inc. <docker@octoblu.com>
 
-COPY ./package.json /app/package.json
-RUN cd /app && npm install
-COPY . /app
+ENV NPM_CONFIG_LOGLEVEL error
 
-EXPOSE 11011
+EXPOSE 80
 
-CMD ["node", "/app/index.js"]
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY package.json /usr/src/app/
+RUN npm -s install --production
+COPY . /usr/src/app/
+
+CMD [ "node", "index.js" ]

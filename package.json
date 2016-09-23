@@ -4,19 +4,20 @@
   "description": "Forward all stats from all running docker containers to Librato",
   "repository": {
     "type": "git",
-    "url": "https://github.com/meteorhacks/docker-librato.git"
+    "url": "https://github.com/octoblu/docker-librato.git"
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 'No tests' && exit 0"
   },
   "author": "Meteorhacks",
   "license": "MIT",
   "dependencies": {
-    "docker-allcontainers": "0.4.0",
-    "docker-stats": "^0.5.1",
-    "envalid": "0.2.0",
-    "librato-node": "4.0.2",
+    "docker-allcontainers": "^0.6.1",
+    "docker-stats": "^0.7.0",
+    "envalid": "^2.2.0",
+    "librato-node": "^4.1.0",
+    "sigterm-handler": "^1.0.2",
     "through2": "2.0.1"
   }
 }
