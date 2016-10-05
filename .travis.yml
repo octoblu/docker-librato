@@ -6,3 +6,8 @@ branches:
     - '/^v[0-9]/'
 notifications:
   webhooks: 'https://deploy-state.octoblu.com/deployments/travis-ci/org'
+after_success:
+  - npm run coverage
+  - 'npm run mocha:json'
+  - 'bash <(curl -s https://codecov.io/bash)'
+  - 'bash <(curl -s https://codecov.octoblu.com/bash)'

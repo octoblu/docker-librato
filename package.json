@@ -1,6 +1,6 @@
 {
   "name": "docker-librato",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Forward all stats from all running docker containers to Librato",
   "repository": {
     "type": "git",
@@ -8,7 +8,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo 'No tests' && exit 0"
+    "test": "echo 'No tests' && exit 0",
+    "coverage": "nyc npm test",
+    "mocha:json": "env NPM_ENV=test mocha --reporter json > coverage/mocha.json",
+    "test:watch": "mocha -w -R mocha-multi --reporter-options spec=-,mocha-osx-reporter=-"
   },
   "author": "Meteorhacks",
   "license": "MIT",
@@ -21,5 +24,11 @@
     "lodash": "^4.16.1",
     "sigterm-handler": "^1.0.3",
     "through2": "2.0.1"
+  },
+  "devDependencies": {
+    "nyc": "^8.3.0",
+    "mocha-osx-reporter": "^0.1.2",
+    "mocha-multi": "^0.9.1",
+    "mocha": "^2.5.3"
   }
 }
