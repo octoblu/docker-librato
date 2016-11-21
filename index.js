@@ -40,7 +40,7 @@ const stats = dockerstats({
   events: allcontainers({ preheat: true, docker:null })
 });
 
-sigtermHandler = new SigtermHandler()
+sigtermHandler = new SigtermHandler({ events: ['SIGINT', 'SIGTERM']})
 
 sigtermHandler.register(librato.stop)
 sigtermHandler.register(function(callback) {
@@ -79,7 +79,7 @@ function update(chunk, enc, callback) {
 }
 
 function getSourceName({ image, name }) {
-  return `${env.CLUSTER_NAME}:${image}:${name}`;
+  return `${env.CLUSTER_NAME}:${_.kebabCase(image)}:${name}`;
 }
 
 function updateContainer({ image, name }, info) {

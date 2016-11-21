@@ -10,18 +10,20 @@ run this repository as a container, with:
 ```sh
 docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -e LIBRATO_EMAIL="" \
-  -e LIBRATO_TOKEN="" \
-  quay.io/octoblu/docker-librato:v1.0.0
+  -e LIBRATO_EMAIL="..." \
+  -e LIBRATO_TOKEN="..." \
+  -e CLUSTER_NAME="..." \
+  octoblu/docker-librato:v1.0.0
 ```
 
 You can also use two different tokens for logging and stats:
 ```sh
 docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -e LIBRATO_EMAIL="" \
-  -e LIBRATO_TOKEN="" \
-  quay.io/octoblu/docker-librato:v1.0.0
+  -e LIBRATO_EMAIL="..." \
+  -e LIBRATO_TOKEN="..." \
+  -e CLUSTER_NAME="..." \
+  octoblu/docker-librato:v1.0.0
 ```
 
 ### Running container in a restricted environment.
@@ -31,9 +33,10 @@ Example:
 ```sh
 docker run --privileged \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -e LIBRATO_EMAIL="" \
-  -e LIBRATO_TOKEN="" \
-  quay.io/octoblu/docker-librato:v1.0.0
+  -e LIBRATO_EMAIL="..." \
+  -e LIBRATO_TOKEN="..." \
+  -e CLUSTER_NAME="..." \
+  octoblu/docker-librato:v1.0.0
 ```
 
 ## Building a docker repo from this repository
