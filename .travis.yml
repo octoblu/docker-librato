@@ -4,8 +4,15 @@ node_js:
 branches:
   only:
     - '/^v[0-9]/'
+before_install:
+  - npm install --global yarn
+install:
+  - yarn install
+script:
+  - yarn test
 notifications:
-  webhooks: 'https://deploy-state.octoblu.com/deployments/travis-ci/org'
+  webhooks:
+    - 'https://beekeeper.octoblu.com/webhooks/travis:ci'
 after_success:
   - npm run coverage
   - 'npm run mocha:json'

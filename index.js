@@ -10,16 +10,14 @@ const debug          = require('debug')('docker-librato')
 const {
   str,
   email,
-  bool,
   num,
 } = envalid
 
 const env = envalid.cleanEnv(process.env, {
-  LIBRATO_EMAIL: email(),
-  LIBRATO_TOKEN: str(),
+  LIBRATO_EMAIL : email(),
+  LIBRATO_TOKEN : str(),
   LIBRATO_PERIOD: num({ default: 1000 * 60 * 3 }),
-  CLUSTER_NAME: str(),
-  MACHINE_ID: str(),
+  CLUSTER_NAME  : str(),
 });
 
 console.log('Starting Librato...');
@@ -39,7 +37,7 @@ librato.on('error', function(error) {
 console.log('Starting Docker event stream...');
 const stats = dockerstats({
   docker: null,
-  events: allcontainers({preheat: true, docker:null})
+  events: allcontainers({ preheat: true, docker:null })
 });
 
 sigtermHandler = new SigtermHandler()
@@ -54,7 +52,7 @@ stats.pipe(through.obj(update));
 
 function update(chunk, enc, callback) {
   var info
-  const name = chunk.name
+  const { name, image } = chunk
 
   try {
     info = {
@@ -76,17 +74,17 @@ function update(chunk, enc, callback) {
     return
   }
 
-  updateContainer(name, info)
+  updateContainer({ name, image }, info)
   callback()
 }
 
-function getSourceName(name) {
-  return `${env.MACHINE_ID}:${env.CLUSTER_NAME}:${name}`;
+function getSourceName({ image, name }) {
+  return `${env.CLUSTER_NAME}:${image}:${name}`;
 }
 
-function updateContainer(name, info) {
-  debug(`Updating stats for ${name}`, info)
+function updateContainer({ image, name }, info) {
+  debug(`Updating stats for ${getSourceName({ image, name })}`, info)
   _.each(info, function(value, key) {
-    librato.measure(`docker-container-${key}`, value, { source: getSourceName(name) })
+    librato.measure(`docker-container-${key}`, value, { source: getSourceName({ image, name }) })
   })
 }
