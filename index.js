@@ -79,7 +79,8 @@ function update(chunk, enc, callback) {
 }
 
 function getSourceName({ image, name }) {
-  return `${env.CLUSTER_NAME}:${_.kebabCase(image)}:${name}`;
+  const imageName = _.tail(_.split(image, '/'))
+  return `${env.CLUSTER_NAME}:${imageName}:${name}`;
 }
 
 function updateContainer({ image, name }, info) {
