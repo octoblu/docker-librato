@@ -17,6 +17,7 @@ const env = envalid.cleanEnv(process.env, {
   LIBRATO_EMAIL : email(),
   LIBRATO_TOKEN : str(),
   LIBRATO_PERIOD: num({ default: 1000 * 60 * 3 }),
+  STATS_INTERVAL: num({ default: 30 })
   CLUSTER_NAME  : str(),
 });
 
@@ -38,6 +39,7 @@ console.log('Starting Docker event stream...');
 const stats = dockerstats({
   docker: null,
   events: allcontainers({ preheat: true, docker:null })
+  statsinterval: env.STATS_INTERVAL,
 });
 
 sigtermHandler = new SigtermHandler({ events: ['SIGINT', 'SIGTERM']})
