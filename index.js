@@ -38,7 +38,7 @@ librato.on('error', function(error) {
 console.log('Starting Docker event stream...');
 const stats = dockerstats({
   docker: null,
-  events: allcontainers({ preheat: true, docker:null })
+  events: allcontainers({ preheat: true, docker:null }),
   statsinterval: env.STATS_INTERVAL,
 });
 
