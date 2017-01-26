@@ -81,7 +81,8 @@ function update(chunk, enc, callback) {
 }
 
 function getSourceName({ image, name }) {
-  const imageName = _.tail(_.split(image, '/'))
+  const baseImageName = _.first(_.split(image, '@'))
+  const imageName = _.tail(_.split(baseImageName, '/'))
   return `${env.CLUSTER_NAME}:${imageName}:${name}`;
 }
 
